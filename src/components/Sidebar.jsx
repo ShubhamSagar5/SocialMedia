@@ -5,7 +5,7 @@ const Sidebar = ({setSelectedTab,selectedTab}) => {
     <div >
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark Sidebar-container fixed"
-        style={{width: '280px'}}
+        style={{width: '200px'}}
       >
         <a
           href="/"
