@@ -10,14 +10,21 @@ const PostList = () => {
 const [loading,setLoading] = useState(false)
 
  useEffect(()=>{
-  handleGetPostClick()
+  const controller = new AbortController()
+  const signal = controller.signal
+  handleGetPostClick(signal)
+  
+  return () => {
+    console.log("Cleaning up Useeffect")
+    controller.abort()
+  }
  },[])
 
- const handleGetPostClick = async () => {
+ const handleGetPostClick = async (signal) => {
   setLoading(true)
-  const data = await fetch('https://dummyjson.com/posts')
+  const data = await fetch('https://dummyjson.com/posts',{signal})
   const json = await data.json()
- console.log(json)
+//  console.log(json)
   await addInitialPost(json.posts)
   setLoading(false)
 
